@@ -6,7 +6,7 @@ import { BadRequestException, ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'http://127.0.0.1:5174',
+    origin: 'http://localhost:5174',
     credentials: true,
     // all headers that client are allowed to use
     allowedHeaders: [
@@ -30,13 +30,10 @@ async function bootstrap() {
           );
           return accumulator;
         }, {});
-        console.log('formattedErrors123', formattedErrors);
-        // return formatted errors being an object with properties mapping to errors
         throw new BadRequestException(formattedErrors);
       },
     }),
   );
-  app.setGlobalPrefix('api');
   await app.listen(3000);
 }
 bootstrap();

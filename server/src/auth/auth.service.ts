@@ -99,7 +99,7 @@ export class AuthService {
     });
 
     if (existingUser) {
-      throw new Error('Email already in use'); // Provide a proper error response
+      throw new BadRequestException('Email already in use');
     }
 
     const hashedPassword = await bcrypt.hash(registerDto.password, 10);
@@ -119,7 +119,7 @@ export class AuthService {
     const user = await this.validateUser(loginDto);
 
     if (!user) {
-      throw new Error('Invalid credentials'); // Provide a proper error response
+      throw new BadRequestException('Invalid credentials');
     }
 
     return this.issueTokens(user, response); // Issue tokens on login

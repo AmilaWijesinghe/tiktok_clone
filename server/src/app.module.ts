@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from './database/database.module';
-import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
-import { APP_GUARD } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
@@ -20,19 +18,10 @@ import { UserModule } from './user/user.module';
       context: ({ req, res }) => ({ req, res }),
     }),
     ConfigModule.forRoot({}),
-    ThrottlerModule.forRoot([
-      { name: 'short', ttl: 1000, limit: 3 },
-      { name: 'long', ttl: 60000, limit: 100 },
-    ]),
     AuthModule,
     UserModule,
   ],
   controllers: [],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: ThrottlerGuard,
-    },
-  ],
+  providers: [],
 })
 export class AppModule {}
