@@ -14,14 +14,14 @@ export class User {
   bio?: string;
 
   @Field({ nullable: true })
-  image: string;
+  image?: string;
 
-  @Field()
-  password: string;
+  @Field({ nullable: true })
+  password?: string;
 
-  @Field()
-  createdAt: Date;
+  @Field({ nullable: true })
+  createdAt?: Date;
 
-  @Field()
-  updatedAt: Date;
+  @Field({ nullable: true })
+  updatedAt?: Date;
 }
